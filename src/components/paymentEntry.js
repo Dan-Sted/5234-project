@@ -73,7 +73,14 @@ const PaymentEntry = () => {
 					</div>
 
 					<div className="mt-6 flex justify-end">
-						<button className="btn-primary" onClick={() => navigate(-1)}>
+						<button
+							className="btn-primary"
+							onClick={() => {
+								navigate('/purchase', {
+									state: { order: location.state.order },
+								});
+							}}
+						>
 							Edit Order
 						</button>
 					</div>

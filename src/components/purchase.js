@@ -1,13 +1,20 @@
-import React, { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import productlist from './productlist';
 
 const Purchase = () => {
+	const location = useLocation();
 	const navigate = useNavigate();
 
 	const [order, setOrder] = useState({
 		buyQuantity: Array(productlist.length).fill(0),
 	});
+
+	useEffect(() => {
+		if (location.state?.order) {
+			setOrder(location.state.order);
+		}
+	}, [location.state?.order]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -60,7 +67,7 @@ const Purchase = () => {
 										type="number"
 										min="0"
 										className="w-20 text-center rounded border-gray-200 shadow-sm no-spinner"
-										value={order.buyQuantity[idx]}
+										value={order.buyQuantity[idx] ?? 0}
 										onChange={(e) => handleQuantityChange(idx, e.target.value)}
 									/>
 
