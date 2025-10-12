@@ -122,7 +122,9 @@ const PaymentEntry = () => {
 						</div>
 
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Cardholder Name:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">
+								Cardholder Name:
+							</label>
 							<input
 								type="text"
 								name="cardholderName"
