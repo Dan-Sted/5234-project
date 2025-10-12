@@ -1,0 +1,5 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Cross-platform pre-commit: delegate to Node script which will run npm install when needed and then lint-staged
+node ./scripts/precommit.js
