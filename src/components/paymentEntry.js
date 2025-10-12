@@ -6,10 +6,8 @@ const PaymentEntry = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    // If this route is visited directly (no navigation state), redirect back to purchase
     const order = location && location.state && location.state.order;
 
-    // keep hooks unconditional: compute purchased even if order is undefined
     const purchased = useMemo(() => {
         if (!order) return [];
         return productlist
@@ -18,7 +16,7 @@ const PaymentEntry = () => {
     }, [order]);
 
     if (!order) {
-        // avoid rendering before redirecting
+        // redirect back to purchase if no order state
         navigate('/purchase');
         return null;
     }
@@ -26,18 +24,37 @@ const PaymentEntry = () => {
     const totalItems = purchased.reduce((s, it) => s + it.qty, 0);
 
     return (
-        <div>
-            <h2>Order Summary</h2>
-            {purchased.length === 0 ? (
-                <p>No items selected.</p>
-            ) : (
-                <ul>
-                    {purchased.map(item => (
-                        <li key={item.id}>{item.qty} × {item.name}</li>
-                    ))}
-                </ul>
-            )}
-            <p><strong>Total items:</strong> {totalItems}</p>
+        <div className="min-h-screen bg-gray-50 p-6">
+            <div className="max-w-3xl mx-auto">
+                <h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
+
+                <div className="card">
+                    {purchased.length === 0 ? (
+                        <p className="text-gray-600">No items selected.</p>
+                    ) : (
+                        <ul className="divide-y">
+                            {purchased.map(item => (
+                                <li key={item.id} className="py-3 flex justify-between items-center">
+                                    <div>
+                                        <div className="font-medium">{item.name}</div>
+                                        {item.price != null && <div className="text-sm text-gray-500">${item.price.toFixed(2)}</div>}
+                                    </div>
+                                    <div className="text-sm text-gray-700">{item.qty} ×</div>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+
+                    <div className="mt-4 flex justify-between items-center">
+                        <div className="text-gray-700">Total items</div>
+                        <div className="font-semibold">{totalItems}</div>
+                    </div>
+
+                    <div className="mt-6 flex justify-end">
+                        <button className="btn-primary" onClick={() => navigate(-1)}>Edit Order</button>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
