@@ -44,6 +44,7 @@ const PaymentEntry = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-50 p-6">
+			{/* Order Summary */}
 			<div className="max-w-3xl mx-auto">
 				<h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
 
@@ -78,44 +79,68 @@ const PaymentEntry = () => {
 					</div>
 				</div>
 			</div>
-			<form onSubmit={handleSubmit} className="">
-				<label>Card Number:</label>
-				<input
-					type="text"
-					name="cardNumber"
-					placeholder="Card Number"
-					value={payment.cardNumber}
-					onChange={handleChange}
-				/>
 
-				<label>Expiration Date:</label>
-				<input
-					type="text"
-					name="expiration"
-					placeholder="Expiration Date"
-					value={payment.expiration}
-					onChange={handleChange}
-				/>
-				<label>CVV:</label>
-				<input
-					type="text"
-					name="cvv"
-					placeholder="CVV"
-					value={payment.cvv}
-					onChange={handleChange}
-				/>
+			{/* Payment form sits in its own max-width container to match Order Summary */}
+			<div className="max-w-3xl mx-auto mt-6">
+				<form onSubmit={handleSubmit} className="card">
+					<h2 className="text-lg font-medium mb-4">Payment Information</h2>
+					<div className="space-y-4">
+						<div className="flex items-center gap-4">
+							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Card Number:</label>
+							<input
+								type="text"
+								name="cardNumber"
+								placeholder="1234 1234 1234 1234"
+								value={payment.cardNumber}
+								onChange={handleChange}
+								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+							/>
+						</div>
 
-				<label>Cardholder Name:</label>
-				<input
-					type="text"
-					name="cardholderName"
-					placeholder="Cardholder Name"
-					value={payment.cardholderName}
-					onChange={handleChange}
-				/>
+						<div className="flex items-center gap-4">
+							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Expiration:</label>
+							<input
+								type="text"
+								name="expiration"
+								placeholder="MM/YY"
+								value={payment.expiration}
+								onChange={handleChange}
+								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+							/>
+						</div>
 
-				<button type="submit">Continue to Shipping</button>
-			</form>
+						<div className="flex items-center gap-4">
+							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">CVV:</label>
+							<input
+								type="text"
+								name="cvv"
+								placeholder="123"
+								value={payment.cvv}
+								onChange={handleChange}
+								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+							/>
+						</div>
+
+						<div className="flex items-center gap-4">
+							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Cardholder Name:</label>
+							<input
+								type="text"
+								name="cardholderName"
+								placeholder="Name on card"
+								value={payment.cardholderName}
+								onChange={handleChange}
+								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+							/>
+						</div>
+					</div>
+
+					<div className="mt-6 flex justify-end">
+						<button type="submit" className="btn-primary">
+							Continue to Shipping
+						</button>
+					</div>
+				</form>
+			</div>
 		</div>
 	);
 };
