@@ -1,0 +1,8 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Ensure dependencies are installed before commit
+npm install --no-audit --no-fund --no-progress
+
+# Run lint-staged
+npx --no-install lint-staged
