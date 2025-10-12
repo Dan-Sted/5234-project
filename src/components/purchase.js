@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
+import productlist from './productlist';
 
 const Purchase = () => {
+    const navigate = useNavigate();
+
     const [order, setOrder] = useState({
-        buyQuantity: [0, 0, 0, 0, 0],
+        buyQuantity: Array(productlist.length).fill(0),
         creditCardNumber: '',
         expirDate: '',
         cvvCode: '',
@@ -14,7 +17,6 @@ const Purchase = () => {
         state: '',
         zip: '',
     });
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -22,39 +24,35 @@ const Purchase = () => {
         navigate('/purchase/paymentEntry', { state: { order } });
     };
 
+    const handleQuantityChange = (index, value) => {
+        setOrder(prev => {
+            const q = [...prev.buyQuantity];
+            q[index] = Number(value) || 0;
+            return { ...prev, buyQuantity: q };
+        });
+    };
+
+    // keep a stable reference to the products list in case it's used elsewhere
+    const productList = useMemo(() => productlist, []);
+
     console.log(order);
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <label>Product 1</label>
-                <input
-                    type="number"
-                    required
-                    value={order.buyQuantity[0]}
-                    onChange={(e) =>
-                        setOrder(prev => {
-                            const q = [...prev.buyQuantity];
-                            q[0] = Number(e.target.value) || 0;
-                            return { ...prev, buyQuantity: q };
-                        })
-                    }
-                />
-                <br />
-                <label>Product 2</label>
-                <input
-                    type="number"
-                    required
-                    value={order.buyQuantity[1]}
-                    onChange={(e) =>
-                        setOrder(prev => {
-                            const q = [...prev.buyQuantity];
-                            q[1] = Number(e.target.value) || 0;
-                            return { ...prev, buyQuantity: q };
-                        })
-                    }
-                />
-                <br />
+                {productList.map((product, idx) => (
+                    <div key={product.id || product.name} style={{ marginBottom: 8 }}>
+                        <label>{product.name}</label>
+                        <input
+                            type="number"
+                            required
+                            min="0"
+                            value={order.buyQuantity[idx]}
+                            onChange={(e) => handleQuantityChange(idx, e.target.value)}
+                        />
+                    </div>
+                ))}
+
                 <button type="submit" className='button'>Pay</button>
             </form>
         </div>
