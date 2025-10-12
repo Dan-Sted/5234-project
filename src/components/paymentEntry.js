@@ -1,10 +1,29 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import productlist from './productlist';
 
 const PaymentEntry = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
+
+	const [payment, setPayment] = useState({
+		cardNumber: '',
+		expiration: '',
+		cvv: '',
+		cardholderName: '',
+	});
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setPayment({ ...payment, [name]: value });
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		navigate('/purchase/shippingEntry', {
+			state: { order: location.state.order, payment },
+		});
+	};
 
 	const order = location && location.state && location.state.order;
 
@@ -59,6 +78,44 @@ const PaymentEntry = () => {
 					</div>
 				</div>
 			</div>
+			<form onSubmit={handleSubmit} className="">
+				<label>Card Number:</label>
+				<input
+					type="text"
+					name="cardNumber"
+					placeholder="Card Number"
+					value={payment.cardNumber}
+					onChange={handleChange}
+				/>
+
+				<label>Expiration Date:</label>
+				<input
+					type="text"
+					name="expiration"
+					placeholder="Expiration Date"
+					value={payment.expiration}
+					onChange={handleChange}
+				/>
+				<label>CVV:</label>
+				<input
+					type="text"
+					name="cvv"
+					placeholder="CVV"
+					value={payment.cvv}
+					onChange={handleChange}
+				/>
+
+				<label>Cardholder Name:</label>
+				<input
+					type="text"
+					name="cardholderName"
+					placeholder="Cardholder Name"
+					value={payment.cardholderName}
+					onChange={handleChange}
+				/>
+
+				<button type="submit">Continue to Shipping</button>
+			</form>
 		</div>
 	);
 };
