@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+src/tailwind.generated.css
+.cache
+.next
+.vercel
+.turbo

@@ -8,22 +8,22 @@ import ViewOrder from './components/viewOrder';
 import Confirmation from './components/confirmation';
 
 function App() {
-  return (
-    <div className="App">
-      <Router>
-        <div className="content">
-        <Routes>
-          <Route path="/purchase" element={<Purchase />} />
-          <Route path="/" element={<Navigate replace to="/purchase" />} />
-          <Route path="/purchase/paymentEntry" element={<PaymentEntry />} />
-          <Route path="/purchase/shippingEntry" element={<ShippingEntry />} />
-          <Route path="/purchase/viewOrder" element={<ViewOrder />} />
-          <Route path="/purchase/viewConfirmation" element={<Confirmation />} />
-        </Routes>
-        </div>
-      </Router>
-    </div>
-  );
+	return (
+		<div className="App">
+			<Router>
+				<div className="content">
+					<Routes>
+						<Route path="/purchase" element={<Purchase />} />
+						<Route path="/" element={<Navigate replace to="/purchase" />} />
+						<Route path="/purchase/paymentEntry" element={<PaymentEntry />} />
+						<Route path="/purchase/shippingEntry" element={<ShippingEntry />} />
+						<Route path="/purchase/viewOrder" element={<ViewOrder />} />
+						<Route path="/purchase/viewConfirmation" element={<Confirmation />} />
+					</Routes>
+				</div>
+			</Router>
+		</div>
+	);
 }
 
 export default App;
