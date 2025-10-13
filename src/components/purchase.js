@@ -49,6 +49,11 @@ const Purchase = () => {
 		['telemetry', telemetryImg],
 	]);
 
+	const totalPrice = productList.reduce(
+		(sum, product, idx) => sum + (product.price || 0) * (order.buyQuantity[idx] || 0),
+		0
+	);
+
 	return (
 		<div className="min-h-screen bg-gray-50 p-6">
 			<div className="max-w-4xl mx-auto">
@@ -68,9 +73,7 @@ const Purchase = () => {
 								/>
 								<div>
 									<div className="font-medium">{product.name}</div>
-									{product.description && (
-										<div className="text-sm text-gray-500">{product.description}</div>
-									)}
+									<div className="text-sm text-gray-500">${product.price.toFixed(2)}</div>
 								</div>
 								<div className="flex items-center gap-3">
 									<button
@@ -101,6 +104,11 @@ const Purchase = () => {
 								</div>
 							</div>
 						))}
+					</div>
+
+					{/* Total Price Section */}
+					<div className="flex justify-end mt-4">
+						<div className="text-lg font-bold">Total Price: ${totalPrice.toFixed(2)}</div>
 					</div>
 
 					<div className="flex justify-end">

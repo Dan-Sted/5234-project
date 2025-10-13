@@ -31,6 +31,7 @@ const ViewOrder = () => {
 	}, [order]);
 
 	const totalItems = purchased.reduce((s, it) => s + it.qty, 0);
+	const totalPrice = purchased.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0);
 
 	const cardCn = payment.cardNumber;
 	const cardExp = payment.expiration;
@@ -79,7 +80,6 @@ const ViewOrder = () => {
 				{/* Order Summary */}
 				<div className="card" style={cardStyle}>
 					<h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
-
 					<div className="card">
 						{purchased.length === 0 ? (
 							<p className="text-gray-600">No items selected.</p>
@@ -89,11 +89,13 @@ const ViewOrder = () => {
 									<li key={item.id} className="py-3 flex justify-between items-center">
 										<div>
 											<div className="font-medium">{item.name}</div>
-											{item.price != null && (
-												<div className="text-sm text-gray-500">${item.price.toFixed(2)}</div>
-											)}
+											<div className="text-sm text-gray-500">
+												${item.price.toFixed(2)} × {item.qty}
+											</div>
 										</div>
-										<div className="text-sm text-gray-700">{item.qty} ×</div>
+										<div className="text-sm text-gray-700 font-semibold">
+											${(item.price * item.qty).toFixed(2)}
+										</div>
 									</li>
 								))}
 							</ul>
@@ -102,6 +104,10 @@ const ViewOrder = () => {
 						<div className="mt-4 flex justify-between items-center">
 							<div className="text-gray-700">Total items</div>
 							<div className="font-semibold">{totalItems}</div>
+						</div>
+						<div className="mt-2 flex justify-between items-center">
+							<div className="text-gray-700 font-bold">Total Price</div>
+							<div className="font-bold text-lg">${totalPrice.toFixed(2)}</div>
 						</div>
 
 						<div className="mt-6 flex justify-end">

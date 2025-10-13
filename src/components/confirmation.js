@@ -23,6 +23,12 @@ const Confirmation = () => {
 
 	const confirmationNumber = 1234;
 
+	// Calculate total price
+	const totalPrice =
+		order && order.items
+			? order.items.reduce((sum, item) => sum + (item.price || 0) * (item.quantity || 0), 0)
+			: 0;
+
 	return (
 		<div className="min-h-screen bg-gray-50 p-6">
 			{/* confirmation*/}
@@ -48,14 +54,22 @@ const Confirmation = () => {
 					{order && order.items && order.items.length > 0 ? (
 						order.items.map((item, idx) => (
 							<li key={idx} className="text-gray-700">
-								{item.name} {item.quantity ? `x${item.quantity}` : ''}
-								{item.price ? ` - $${item.price}` : ''}
+								{item.name} {item.quantity ? `x${item.quantity}` : ''}{' '}
+								{item.price ? `- $${item.price.toFixed(2)} each` : ''}
+								{item.price && item.quantity
+									? ` (Subtotal: $${(item.price * item.quantity).toFixed(2)})`
+									: ''}
 							</li>
 						))
 					) : (
 						<li className="text-gray-500">No items found.</li>
 					)}
 				</ul>
+
+				<div className="mt-4 flex justify-between items-center">
+					<div className="text-gray-700 font-bold">Total Price</div>
+					<div className="font-bold text-lg">${totalPrice.toFixed(2)}</div>
+				</div>
 
 				<h3 className="text-lg font-semibold text-gray-800 mt-4">Shipping Information</h3>
 				<p className="text-gray-700">{shipping.name}</p>
