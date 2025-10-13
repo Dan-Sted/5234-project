@@ -1,6 +1,12 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import productlist from './productlist';
+import scrawImg from './images/scraw.png';
+import helmetImg from './images/Racing Helmet - Carbon Fiber.jpg';
+import suitImg from './images/Fire-Resistant Racing Suit.jpeg';
+import wingImg from './images/High-Downforce Front Wing.jpg';
+import brakeImg from './images/Carbon Ceramic Brake Kit.jpg';
+import telemetryImg from './images/Telemetry Data Logger.jpg';
 
 const Purchase = () => {
 	const navigate = useNavigate();
@@ -28,6 +34,14 @@ const Purchase = () => {
 
 	const anySelected = order.buyQuantity.some((q) => q > 0);
 
+	const productImages = new Map([
+		['helmet-cf', helmetImg],
+		['suit-fire', suitImg],
+		['brake-ceramic', brakeImg],
+		['wing-front', wingImg],
+		['telemetry', telemetryImg],
+	]);
+
 	return (
 		<div className="min-h-screen bg-gray-50 p-6">
 			<div className="max-w-4xl mx-auto">
@@ -40,6 +54,11 @@ const Purchase = () => {
 								key={product.id || product.name}
 								className="bg-white rounded-lg shadow p-4 flex items-center justify-between"
 							>
+								<img
+									src={productImages.get(product.id)}
+									alt={product.name}
+									className="w-20 h-20 object-cover rounded-md"
+								/>
 								<div>
 									<div className="font-medium">{product.name}</div>
 									{product.description && (
