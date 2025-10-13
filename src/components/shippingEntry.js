@@ -21,7 +21,7 @@ const ShippingEntry = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		navigate('/purchase/reviewOrder', {
+		navigate('/purchase/viewOrder', {
 			state: {
 				order: location.state.order,
 				payment: location.state.payment,
