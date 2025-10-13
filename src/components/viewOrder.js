@@ -1,6 +1,17 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import productlist from './productlist';
+
+const cardStyle = {
+	margin: '0 auto',
+	maxWidth: 500,
+	minWidth: 300,
+	width: '100%',
+	padding: '2rem',
+	boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+	borderRadius: '8px',
+	background: '#fff',
+};
 
 const ViewOrder = () => {
 	const location = useLocation();
@@ -36,7 +47,14 @@ const ViewOrder = () => {
 		e.preventDefault();
 		navigate('/purchase/confirmation', {
 			state: {
-				order: location.state.order,
+				order: {
+					...location.state.order,
+					items: purchased.map((item) => ({
+						name: item.name,
+						quantity: item.qty,
+						price: item.price,
+					})),
+				},
 				payment: location.state.payment,
 				shipping: location.state.shipping,
 			},
@@ -49,97 +67,108 @@ const ViewOrder = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-50 p-6">
-			{/* Order Summary */}
-			<div className="max-w-3xl mx-auto">
-				<h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
+			<div
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					gap: '2rem',
+					marginTop: '2rem',
+				}}
+			>
+				{/* Order Summary */}
+				<div className="card" style={cardStyle}>
+					<h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
 
-				<div className="card">
-					{purchased.length === 0 ? (
-						<p className="text-gray-600">No items selected.</p>
-					) : (
-						<ul className="divide-y">
-							{purchased.map((item) => (
-								<li key={item.id} className="py-3 flex justify-between items-center">
-									<div>
-										<div className="font-medium">{item.name}</div>
-										{item.price != null && (
-											<div className="text-sm text-gray-500">${item.price.toFixed(2)}</div>
-										)}
-									</div>
-									<div className="text-sm text-gray-700">{item.qty} ×</div>
-								</li>
-							))}
-						</ul>
-					)}
+					<div className="card">
+						{purchased.length === 0 ? (
+							<p className="text-gray-600">No items selected.</p>
+						) : (
+							<ul className="divide-y">
+								{purchased.map((item) => (
+									<li key={item.id} className="py-3 flex justify-between items-center">
+										<div>
+											<div className="font-medium">{item.name}</div>
+											{item.price != null && (
+												<div className="text-sm text-gray-500">${item.price.toFixed(2)}</div>
+											)}
+										</div>
+										<div className="text-sm text-gray-700">{item.qty} ×</div>
+									</li>
+								))}
+							</ul>
+						)}
 
-					<div className="mt-4 flex justify-between items-center">
-						<div className="text-gray-700">Total items</div>
-						<div className="font-semibold">{totalItems}</div>
+						<div className="mt-4 flex justify-between items-center">
+							<div className="text-gray-700">Total items</div>
+							<div className="font-semibold">{totalItems}</div>
+						</div>
+
+						<div className="mt-6 flex justify-end">
+							<button className="btn-primary" onClick={() => navigate(-3)}>
+								Edit Order
+							</button>
+						</div>
 					</div>
+				</div>
 
+				{/* Payment Information List */}
+				<div className="card" style={cardStyle}>
+					<h2 className="text-xl font-semibold text-gray-900 mb-4">Payment Information</h2>
+					<ul className="space-y-3">
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">Card Number:</span>
+							<span className="text-gray-900">{cardCn}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">Expiration:</span>
+							<span className="text-gray-900">{cardExp}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">CVV:</span>
+							<span className="text-gray-900">{cardCvv}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">Cardholder Name:</span>
+							<span className="text-gray-900">{cardName}</span>
+						</li>
+					</ul>
+				</div>
+
+				{/* Shipping Information List */}
+				<div className="card" style={cardStyle}>
+					<h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping Information</h2>
+					<ul className="space-y-3">
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">Name:</span>
+							<span className="text-gray-900">{shipName}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">Address:</span>
+							<span className="text-gray-900">{shipAddress}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">City:</span>
+							<span className="text-gray-900">{shipCity}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">State:</span>
+							<span className="text-gray-900">{shipState}</span>
+						</li>
+						<li className="flex items-center">
+							<span className="font-medium text-gray-700 w-40">ZIP Code:</span>
+							<span className="text-gray-900">{shipZip}</span>
+						</li>
+					</ul>
+				</div>
+				<form onSubmit={handleSubmit} className="card">
 					<div className="mt-6 flex justify-end">
-						<button className="btn-primary" onClick={() => navigate(-3)}>
-							Edit Order
+						<button type="submit" className="btn-primary">
+							Continue to confirmation
 						</button>
 					</div>
-				</div>
+				</form>
 			</div>
-			{/* Payment Information List */}
-			<div className="bg-white rounded-lg shadow-md p-6">
-				<h2 className="text-xl font-semibold text-gray-900 mb-4">Payment Information</h2>
-				<ul className="space-y-3">
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">Card Number:</span>
-						<span className="text-gray-900">{cardCn}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">Expiration:</span>
-						<span className="text-gray-900">{cardExp}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">CVV:</span>
-						<span className="text-gray-900">{cardCvv}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">Cardholder Name:</span>
-						<span className="text-gray-900">{cardName}</span>
-					</li>
-				</ul>
-			</div>
-
-			{/* Shipping Information List */}
-			<div className="bg-white rounded-lg shadow-md p-6">
-				<h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping Information</h2>
-				<ul className="space-y-3">
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">Name:</span>
-						<span className="text-gray-900">{shipName}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">Address:</span>
-						<span className="text-gray-900">{shipAddress}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">City:</span>
-						<span className="text-gray-900">{shipCity}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">State:</span>
-						<span className="text-gray-900">{shipState}</span>
-					</li>
-					<li className="flex items-center">
-						<span className="font-medium text-gray-700 w-40">ZIP Code:</span>
-						<span className="text-gray-900">{shipZip}</span>
-					</li>
-				</ul>
-			</div>
-			<form onSubmit={handleSubmit} className="card">
-				<div className="mt-6 flex justify-end">
-					<button type="submit" className="btn-primary">
-						Continue to confirmation
-					</button>
-				</div>
-			</form>
 		</div>
 	);
 };
