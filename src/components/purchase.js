@@ -1,12 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import productlist from './productlist';
-import scrawImg from './images/scraw.png';
-import helmetImg from './images/Racing Helmet - Carbon Fiber.jpg';
-import suitImg from './images/Fire-Resistant Racing Suit.jpeg';
-import wingImg from './images/High-Downforce Front Wing.jpg';
-import brakeImg from './images/Carbon Ceramic Brake Kit.jpg';
-import telemetryImg from './images/Telemetry Data Logger.jpg';
+import productlist, { productImages } from './productlist';
 
 const Purchase = () => {
 	const location = useLocation();
@@ -40,14 +34,6 @@ const Purchase = () => {
 	const productList = useMemo(() => productlist, []);
 
 	const anySelected = order.buyQuantity.some((q) => q > 0);
-
-	const productImages = new Map([
-		['helmet-cf', helmetImg],
-		['suit-fire', suitImg],
-		['brake-ceramic', brakeImg],
-		['wing-front', wingImg],
-		['telemetry', telemetryImg],
-	]);
 
 	const totalPrice = productList.reduce(
 		(sum, product, idx) => sum + (product.price || 0) * (order.buyQuantity[idx] || 0),
