@@ -167,8 +167,8 @@ const ViewOrder = () => {
 						</li>
 					</ul>
 				</div>
-				<form onSubmit={handleSubmit} className="card">
-					<div className="mt-6 flex justify-end">
+				<form onSubmit={handleSubmit} className="card" style={cardStyle}>
+					<div className="flex justify-center">
 						<button type="submit" className="btn-primary">
 							Continue to confirmation
 						</button>

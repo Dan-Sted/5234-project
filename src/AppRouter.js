@@ -8,6 +8,7 @@ import Purchase from './components/pages/purchase/Purchase';
 import PaymentEntry from './components/pages/purchase/paymentEntry';
 import ShippingEntry from './components/pages/purchase/shippingEntry';
 import ViewOrder from './components/pages/purchase/viewOrder';
+import Confirmation from './components/pages/purchase/confirmation';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 
@@ -26,6 +27,7 @@ const AppRouter = () => {
 						<Route path="/purchase/paymentEntry" element={<PaymentEntry />} />
 						<Route path="/purchase/shippingEntry" element={<ShippingEntry />} />
 						<Route path="/purchase/viewOrder" element={<ViewOrder />} />
+						<Route path="/purchase/confirmation" element={<Confirmation />} />
 					</Routes>
 				</div>
 				<Footer />

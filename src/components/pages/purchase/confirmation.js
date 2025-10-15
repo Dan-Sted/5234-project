@@ -1,6 +1,4 @@
-import React, { useMemo, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import productlist from './productlist';
+import { useLocation } from 'react-router-dom';
 
 const cardStyle = {
 	margin: '2rem auto',
@@ -15,7 +13,6 @@ const cardStyle = {
 
 const Confirmation = () => {
 	const location = useLocation();
-	const navigate = useNavigate();
 
 	const order = location && location.state && location.state.order;
 	const payment = location && location.state && location.state.payment;
