@@ -9,6 +9,9 @@ const Navbar = () => {
 					PitStopProvisions
 				</Link>
 				<div className="flex space-x-4">
+					<Link to="/purchase" className="hover:underline font-semibold">
+						Buy Now
+					</Link>
 					<Link to="/products" className="hover:underline">
 						Products
 					</Link>

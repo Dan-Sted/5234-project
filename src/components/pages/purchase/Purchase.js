@@ -42,24 +42,24 @@ const Purchase = () => {
 
 	return (
 		<div className="min-h-screen bg-gray-50 p-6">
-			<div className="max-w-4xl mx-auto">
-				<h1 className="text-2xl font-semibold mb-4">PitStopProvisions Products</h1>
+			<div className="max-w-2xl mx-auto">
+				<h1 className="text-2xl text-center font-semibold mb-4">PitStopProvisions Products</h1>
 
 				<form onSubmit={handleSubmit} className="grid gap-6">
-					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+					<div className="grid grid-cols-1 gap-4">
 						{productList.map((product, idx) => (
 							<div
 								key={product.id || product.name}
-								className="bg-white rounded-lg shadow p-4 flex items-center justify-between"
+								className="bg-white rounded-lg shadow p-4 flex items-center justify-between gap-x-4"
 							>
 								<img
 									src={productImages.get(product.id)}
 									alt={product.name}
-									className="w-20 h-20 object-cover rounded-md"
+									className="w-20 h-20 object-cover rounded-md mr-6"
 								/>
-								<div>
-									<div className="font-medium">{product.name}</div>
-									<div className="text-sm text-gray-500">${product.price.toFixed(2)}</div>
+								<div className="text-left flex-1">
+									<div className="font-medium text-left">{product.name}</div>
+									<div className="text-sm text-gray-500 text-left">${product.price.toFixed(2)}</div>
 								</div>
 								<div className="flex items-center gap-3">
 									<button
@@ -68,7 +68,7 @@ const Purchase = () => {
 										className="h-12 w-12 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-700 shadow"
 										onClick={() => handleQuantityChange(idx, (order.buyQuantity[idx] || 0) - 1)}
 									>
-										−
+										-
 									</button>
 
 									<input
