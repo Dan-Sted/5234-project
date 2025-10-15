@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import productlist from './productlist';
+import productlist from '../../common/productlist';
 
 const PaymentEntry = () => {
 	const location = useLocation();

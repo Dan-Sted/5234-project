@@ -1,11 +1,11 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Purchase from './components/purchase';
-import PaymentEntry from './components/paymentEntry';
-import ShippingEntry from './components/shippingEntry';
-import ViewOrder from './components/viewOrder';
-import Confirmation from './components/confirmation';
+import Purchase from './components/pages/purchase/Purchase';
+import PaymentEntry from './components/pages/purchase/paymentEntry';
+import ShippingEntry from './components/pages/purchase/shippingEntry';
+import ViewOrder from './components/pages/purchase/viewOrder';
+import Confirmation from './components/pages/purchase/confirmation';
 
 function App() {
 	return (

@@ -7,11 +7,11 @@ const productlist = [
 ];
 
 export const productImages = new Map([
-	['helmet-cf', require('./images/Racing Helmet - Carbon Fiber.jpg')],
-	['suit-fire', require('./images/Fire-Resistant Racing Suit.jpeg')],
-	['brake-ceramic', require('./images/Carbon Ceramic Brake Kit.jpg')],
-	['wing-front', require('./images/High-Downforce Front Wing.jpg')],
-	['telemetry', require('./images/Telemetry Data Logger.jpg')],
+	['helmet-cf', require('../images/Racing Helmet - Carbon Fiber.jpg')],
+	['suit-fire', require('../images/Fire-Resistant Racing Suit.jpeg')],
+	['brake-ceramic', require('../images/Carbon Ceramic Brake Kit.jpg')],
+	['wing-front', require('../images/High-Downforce Front Wing.jpg')],
+	['telemetry', require('../images/Telemetry Data Logger.jpg')],
 ]);
 
 export default productlist;

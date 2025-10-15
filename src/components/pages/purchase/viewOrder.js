@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import productlist from './productlist';
+import productlist from '../../common/productlist';
 
 const cardStyle = {
 	margin: '0 auto',

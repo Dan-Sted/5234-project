@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import productlist, { productImages } from './productlist';
+import productlist, { productImages } from '../../common/productlist';
 
 const Purchase = () => {
 	const location = useLocation();
