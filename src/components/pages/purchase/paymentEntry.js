@@ -44,44 +44,44 @@ const PaymentEntry = () => {
 	const totalPrice = purchased.reduce((sum, item) => sum + (item.price || 0) * item.qty, 0);
 
 	return (
-		<div className="min-h-screen bg-gray-50 p-6">
+		<div className="min-h-screen bg-secondary-bg p-6">
 			{/* Order Summary */}
 			<div className="max-w-3xl mx-auto">
-				<h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
+				<h1 className="text-2xl font-semibold text-primary-text mb-4">Order Summary</h1>
 
 				<div className="card">
 					{purchased.length === 0 ? (
-						<p className="text-gray-600">No items selected.</p>
+						<p className="text-placeholder-color">No items selected.</p>
 					) : (
 						<ul className="divide-y">
 							{purchased.map((item) => (
 								<li key={item.id} className="py-3 flex justify-between items-center">
 									<div>
-										<div className="font-medium">{item.name}</div>
+										<div className="font-medium text-primary-text">{item.name}</div>
 										{item.price != null && (
-											<div className="text-sm text-gray-500">
-												${item.price.toFixed(2)} × {item.qty}
+											<div className="text-sm text-secondary-text">
+												${item.price.toFixed(2)} x {item.qty}
 											</div>
 										)}
 									</div>
-									<div className="text-sm text-gray-700">{item.qty} ×</div>
+									<div className="text-sm text-secondary-text">{item.qty} x</div>
 								</li>
 							))}
 						</ul>
 					)}
 
 					<div className="mt-4 flex justify-between items-center">
-						<div className="text-gray-700">Total items</div>
+						<div className="text-secondary-text">Total items</div>
 						<div className="font-semibold">{totalItems}</div>
 					</div>
 					<div className="mt-2 flex justify-between items-center">
-						<div className="text-gray-700 font-bold">Total Price</div>
+						<div className="text-secondary-text font-bold">Total Price</div>
 						<div className="font-bold text-lg">${totalPrice.toFixed(2)}</div>
 					</div>
 
 					<div className="mt-6 flex justify-end">
 						<button
-							className="btn-primary"
+							className="btn-secondary hover:bg-primary-bg-hover"
 							onClick={() => {
 								navigate('/purchase', {
 									state: { order: location.state.order },
@@ -100,7 +100,9 @@ const PaymentEntry = () => {
 					<h2 className="text-lg font-medium mb-4">Payment Information</h2>
 					<div className="space-y-4">
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Card Number:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">
+								Card Number:
+							</label>
 							<input
 								type="text"
 								name="cardNumber"
@@ -112,7 +114,9 @@ const PaymentEntry = () => {
 						</div>
 
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Expiration:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">
+								Expiration:
+							</label>
 							<input
 								type="text"
 								name="expiration"
@@ -124,7 +128,7 @@ const PaymentEntry = () => {
 						</div>
 
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">CVV:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">CVV:</label>
 							<input
 								type="text"
 								name="cvv"
@@ -136,7 +140,7 @@ const PaymentEntry = () => {
 						</div>
 
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">
 								Cardholder Name:
 							</label>
 							<input
@@ -151,7 +155,7 @@ const PaymentEntry = () => {
 					</div>
 
 					<div className="mt-6 flex justify-end">
-						<button type="submit" className="btn-primary">
+						<button type="submit" className="btn-secondary hover:bg-primary-bg-hover">
 							Continue to Shipping
 						</button>
 					</div>

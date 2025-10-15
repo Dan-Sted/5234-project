@@ -10,7 +10,7 @@ const cardStyle = {
 	padding: '2rem',
 	boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
 	borderRadius: '8px',
-	background: '#fff',
+	background: 'var(--primary-bg)', // Changed to primary background
 };
 
 const ViewOrder = () => {
@@ -67,7 +67,7 @@ const ViewOrder = () => {
 	}
 
 	return (
-		<div className="min-h-screen bg-gray-50 p-6">
+		<div className="min-h-screen bg-secondary-bg p-6">
 			<div
 				style={{
 					display: 'flex',
@@ -79,21 +79,21 @@ const ViewOrder = () => {
 			>
 				{/* Order Summary */}
 				<div className="card" style={cardStyle}>
-					<h1 className="text-2xl font-semibold mb-4">Order Summary</h1>
+					<h1 className="text-2xl font-semibold text-primary-text mb-4">Order Summary</h1>
 					<div className="card">
 						{purchased.length === 0 ? (
-							<p className="text-gray-600">No items selected.</p>
+							<p className="text-placeholder-color">No items selected.</p>
 						) : (
 							<ul className="divide-y">
 								{purchased.map((item) => (
 									<li key={item.id} className="py-3 flex justify-between items-center">
 										<div>
-											<div className="font-medium">{item.name}</div>
-											<div className="text-sm text-gray-500">
-												${item.price.toFixed(2)} × {item.qty}
+											<div className="font-medium text-primary-text">{item.name}</div>
+											<div className="text-sm text-secondary-text">
+												${item.price.toFixed(2)} x {item.qty}
 											</div>
 										</div>
-										<div className="text-sm text-gray-700 font-semibold">
+										<div className="text-sm text-secondary-text font-semibold">
 											${(item.price * item.qty).toFixed(2)}
 										</div>
 									</li>
@@ -102,16 +102,19 @@ const ViewOrder = () => {
 						)}
 
 						<div className="mt-4 flex justify-between items-center">
-							<div className="text-gray-700">Total items</div>
+							<div className="text-secondary-text">Total items</div>
 							<div className="font-semibold">{totalItems}</div>
 						</div>
 						<div className="mt-2 flex justify-between items-center">
-							<div className="text-gray-700 font-bold">Total Price</div>
+							<div className="text-secondary-text font-bold">Total Price</div>
 							<div className="font-bold text-lg">${totalPrice.toFixed(2)}</div>
 						</div>
 
 						<div className="mt-6 flex justify-end">
-							<button className="btn-primary" onClick={() => navigate(-3)}>
+							<button
+								className="btn-secondary hover:bg-primary-bg-hover"
+								onClick={() => navigate(-3)}
+							>
 								Edit Order
 							</button>
 						</div>
@@ -120,56 +123,56 @@ const ViewOrder = () => {
 
 				{/* Payment Information List */}
 				<div className="card" style={cardStyle}>
-					<h2 className="text-xl font-semibold text-gray-900 mb-4">Payment Information</h2>
+					<h2 className="text-xl font-semibold text-primary-text mb-4">Payment Information</h2>
 					<ul className="space-y-3">
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">Card Number:</span>
-							<span className="text-gray-900">{cardCn}</span>
+							<span className="font-medium text-secondary-text w-40">Card Number:</span>
+							<span className="text-primary-text">{cardCn}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">Expiration:</span>
-							<span className="text-gray-900">{cardExp}</span>
+							<span className="font-medium text-secondary-text w-40">Expiration:</span>
+							<span className="text-primary-text">{cardExp}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">CVV:</span>
-							<span className="text-gray-900">{cardCvv}</span>
+							<span className="font-medium text-secondary-text w-40">CVV:</span>
+							<span className="text-primary-text">{cardCvv}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">Cardholder Name:</span>
-							<span className="text-gray-900">{cardName}</span>
+							<span className="font-medium text-secondary-text w-40">Cardholder Name:</span>
+							<span className="text-primary-text">{cardName}</span>
 						</li>
 					</ul>
 				</div>
 
 				{/* Shipping Information List */}
 				<div className="card" style={cardStyle}>
-					<h2 className="text-xl font-semibold text-gray-900 mb-4">Shipping Information</h2>
+					<h2 className="text-xl font-semibold text-primary-text mb-4">Shipping Information</h2>
 					<ul className="space-y-3">
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">Name:</span>
-							<span className="text-gray-900">{shipName}</span>
+							<span className="font-medium text-secondary-text w-40">Name:</span>
+							<span className="text-primary-text">{shipName}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">Address:</span>
-							<span className="text-gray-900">{shipAddress}</span>
+							<span className="font-medium text-secondary-text w-40">Address:</span>
+							<span className="text-primary-text">{shipAddress}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">City:</span>
-							<span className="text-gray-900">{shipCity}</span>
+							<span className="font-medium text-secondary-text w-40">City:</span>
+							<span className="text-primary-text">{shipCity}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">State:</span>
-							<span className="text-gray-900">{shipState}</span>
+							<span className="font-medium text-secondary-text w-40">State:</span>
+							<span className="text-primary-text">{shipState}</span>
 						</li>
 						<li className="flex items-center">
-							<span className="font-medium text-gray-700 w-40">ZIP Code:</span>
-							<span className="text-gray-900">{shipZip}</span>
+							<span className="font-medium text-secondary-text w-40">ZIP Code:</span>
+							<span className="text-primary-text">{shipZip}</span>
 						</li>
 					</ul>
 				</div>
 				<form onSubmit={handleSubmit} className="card" style={cardStyle}>
 					<div className="flex justify-center">
-						<button type="submit" className="btn-primary">
+						<button type="submit" className="btn-secondary hover:bg-primary-bg-hover">
 							Continue to confirmation
 						</button>
 					</div>

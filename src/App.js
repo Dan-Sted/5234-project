@@ -1,5 +1,4 @@
 import './App.css';
-import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Purchase from './components/pages/purchase/Purchase';
 import PaymentEntry from './components/pages/purchase/paymentEntry';

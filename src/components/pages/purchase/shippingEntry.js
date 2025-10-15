@@ -31,24 +31,24 @@ const ShippingEntry = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-50 p-6">
+		<div className="min-h-screen bg-secondary-bg p-6">
 			<div className="max-w-3xl mx-auto mt-6">
 				<form onSubmit={handleSubmit} className="card">
-					<h2 className="text-lg font-medium mb-4">Shipping Information</h2>
+					<h2 className="text-lg font-medium text-primary-text mb-4">Shipping Information</h2>
 					<div className="space-y-4">
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">Name:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">Name:</label>
 							<input
 								type="text"
 								name="name"
 								placeholder="Full Name"
 								value={shipping.name}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 rounded border-secondary-text shadow-sm p-2"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">
 								Address Line 1:
 							</label>
 							<input
@@ -57,11 +57,11 @@ const ShippingEntry = () => {
 								placeholder="Address Line 1"
 								value={shipping.addressLine1}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 rounded border-secondary-text shadow-sm p-2"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">
 								Address Line 2:
 							</label>
 							<input
@@ -70,45 +70,47 @@ const ShippingEntry = () => {
 								placeholder="Address Line 2"
 								value={shipping.addressLine2}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 rounded border-secondary-text shadow-sm p-2"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">City:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">City:</label>
 							<input
 								type="text"
 								name="city"
 								placeholder="City"
 								value={shipping.city}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 rounded border-secondary-text shadow-sm p-2"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">State:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">State:</label>
 							<input
 								type="text"
 								name="state"
 								placeholder="State"
 								value={shipping.state}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 rounded border-secondary-text shadow-sm p-2"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
-							<label className="w-36 sm:w-40 text-sm font-medium text-gray-700">ZIP Code:</label>
+							<label className="w-36 sm:w-40 text-sm font-medium text-secondary-text">
+								ZIP Code:
+							</label>
 							<input
 								type="text"
 								name="zip"
 								placeholder="ZIP Code"
 								value={shipping.zip}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 rounded border-secondary-text shadow-sm p-2"
 							/>
 						</div>
 					</div>
 					<div className="mt-6 flex justify-end">
-						<button type="submit" className="btn-primary">
+						<button type="submit" className="btn-secondary hover:bg-primary-bg-hover">
 							Continue to Review Order
 						</button>
 					</div>
