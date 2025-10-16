@@ -109,7 +109,7 @@ const PaymentEntry = () => {
 								placeholder="1234 1234 1234 1234"
 								value={payment.cardNumber}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 
@@ -123,7 +123,7 @@ const PaymentEntry = () => {
 								placeholder="MM/YY"
 								value={payment.expiration}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 
@@ -135,7 +135,7 @@ const PaymentEntry = () => {
 								placeholder="123"
 								value={payment.cvv}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 
@@ -149,7 +149,7 @@ const PaymentEntry = () => {
 								placeholder="Name on card"
 								value={payment.cardholderName}
 								onChange={handleChange}
-								className="flex-1 rounded border-gray-200 shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 					</div>

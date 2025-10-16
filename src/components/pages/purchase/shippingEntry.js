@@ -44,7 +44,7 @@ const ShippingEntry = () => {
 								placeholder="Full Name"
 								value={shipping.name}
 								onChange={handleChange}
-								className="flex-1 rounded border-secondary-text shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
@@ -57,7 +57,7 @@ const ShippingEntry = () => {
 								placeholder="Address Line 1"
 								value={shipping.addressLine1}
 								onChange={handleChange}
-								className="flex-1 rounded border-secondary-text shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ const ShippingEntry = () => {
 								placeholder="Address Line 2"
 								value={shipping.addressLine2}
 								onChange={handleChange}
-								className="flex-1 rounded border-secondary-text shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
@@ -81,7 +81,7 @@ const ShippingEntry = () => {
 								placeholder="City"
 								value={shipping.city}
 								onChange={handleChange}
-								className="flex-1 rounded border-secondary-text shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
@@ -92,7 +92,7 @@ const ShippingEntry = () => {
 								placeholder="State"
 								value={shipping.state}
 								onChange={handleChange}
-								className="flex-1 rounded border-secondary-text shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 						<div className="flex items-center gap-4">
@@ -105,7 +105,7 @@ const ShippingEntry = () => {
 								placeholder="ZIP Code"
 								value={shipping.zip}
 								onChange={handleChange}
-								className="flex-1 rounded border-secondary-text shadow-sm p-2"
+								className="flex-1 bg-secondary-bg text-primary-text border border-border-color rounded-md px-3 py-2 shadow-sm placeholder-placeholder-color focus:outline-none focus:ring-2 focus:ring-focus-ring transition"
 							/>
 						</div>
 					</div>

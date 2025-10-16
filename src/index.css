@@ -49,11 +49,11 @@ code {
 }
 
 :root {
-	--primary-bg: #252423;
-	--primary-bg-hover: #ed1c24;
+	--primary-bg: #000000;
+	--primary-bg-hover: #ff1e00;
 	--primary-text: #ffffff;
-	--secondary-bg: #343231;
-	--secondary-text: #9095a1;
+	--secondary-bg: #15151e;
+	--secondary-text: #aaaaaa;
 	--border-color: #d1d5db;
 	--placeholder-color: #9ca3af;
 	--focus-ring: #93c5fd;
