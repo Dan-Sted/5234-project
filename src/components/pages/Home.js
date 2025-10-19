@@ -9,7 +9,7 @@ const Home = () => {
 					Your one-stop shop for premium racing gear and accessories.
 				</p>
 				<div className="mt-8 flex justify-center">
-					<img src="/public/logo192.png" alt="PitStopProvisions" className="w-48 h-48" />
+					<img src={require('../images/logo.png')} alt="PitStopProvisions" className="w-100 h-90" />
 				</div>
 			</main>
 		</div>
