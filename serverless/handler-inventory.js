@@ -28,29 +28,3 @@ module.exports.list = async (event) => {
 		};
 	}
 };
-
-// GET /inventory/items/{id}
-module.exports.getById = async (event) => {
-	try {
-		const id = event.pathParameters && event.pathParameters.id;
-		const item = items.find((i) => i.id === id);
-		if (!item) {
-			return {
-				statusCode: 404,
-				headers: { 'Access-Control-Allow-Origin': '*' },
-				body: JSON.stringify({ error: 'Not found' }),
-			};
-		}
-		return {
-			statusCode: 200,
-			headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
-			body: JSON.stringify(item),
-		};
-	} catch (err) {
-		return {
-			statusCode: 500,
-			headers: { 'Access-Control-Allow-Origin': '*' },
-			body: JSON.stringify({ error: 'Internal error' }),
-		};
-	}
-};

@@ -19,7 +19,7 @@ functions:
           cors: true
 
   inventoryGet:
-    handler: handler-inventory.getById
+    handler: handler-inventory-getById.getById
     events:
       - http:
           path: inventory/items/{id}
