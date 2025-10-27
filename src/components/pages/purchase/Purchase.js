@@ -9,12 +9,18 @@ const Purchase = () => {
 
 	useEffect(() => {
 		const fetchInventory = async () => {
-			const data = await getInventory();
-			setInventory(data);
-			setOrder((prevOrder) => ({
-				...prevOrder,
-				buyQuantity: Array(data.length).fill(0),
-			}));
+			console.log('fetchInventory called');
+			try {
+				const data = await getInventory();
+				console.log('Fetched Inventory:', data);
+				setInventory(data);
+				setOrder((prevOrder) => ({
+					...prevOrder,
+					buyQuantity: Array(data.length).fill(0),
+				}));
+			} catch (error) {
+				console.error('Error fetching inventory:', error);
+			}
 		};
 		fetchInventory();
 	}, []);

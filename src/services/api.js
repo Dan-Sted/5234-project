@@ -3,6 +3,7 @@ import axios from 'axios';
 const API_BASE_URL = process.env.REACT_APP_INVENTORY_API;
 
 export const getInventory = async () => {
+	console.log('getInventory called');
 	const response = await axios.get(`${API_BASE_URL}/inventory`);
 	return response.data;
 };
