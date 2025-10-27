@@ -1,0 +1,43 @@
+service: pitstop-provisions-api
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  stage: dev
+  environment:
+    INVENTORY_API: ${ 'https://example.com'}
+functions:
+  inventoryList:
+    handler: handler-inventory.list
+    events:
+      - http:
+          path: inventory
+          method: get
+          cors: true
+
+  inventoryGet:
+    handler: handler-inventory.getById
+    events:
+      - http:
+          path: inventory/items/{id}
+          method: get
+          cors: true
+
+  orderCreate:
+    handler: handler-order.create
+    environment:
+      INVENTORY_API: ${ssm:/pitstop/inventory-api} # Use AWS Systems Manager Parameter Store
+    events:
+      - http:
+          path: order
+          method: post
+          cors: true
+
+plugins:
+  - serverless-offline
+
+package:
+  individually: true

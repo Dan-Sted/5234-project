@@ -1,44 +1,43 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import productlist, { productImages } from '../../common/productlist';
+import React, { useEffect, useState } from 'react';
+import { getInventory, createOrder } from '../../../services/api';
 
 const Purchase = () => {
-	const location = useLocation();
-	const navigate = useNavigate();
-
+	const [inventory, setInventory] = useState([]);
 	const [order, setOrder] = useState({
-		buyQuantity: Array(productlist.length).fill(0),
+		buyQuantity: [],
 	});
 
 	useEffect(() => {
-		if (location.state?.order) {
-			setOrder(location.state.order);
-		}
-	}, [location.state?.order]);
+		const fetchInventory = async () => {
+			const data = await getInventory();
+			setInventory(data);
+			setOrder((prevOrder) => ({
+				...prevOrder,
+				buyQuantity: Array(data.length).fill(0),
+			}));
+		};
+		fetchInventory();
+	}, []);
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// send the order inside the navigation state so PaymentEntry can read it
-		navigate('/purchase/paymentEntry', { state: { order } });
+		try {
+			const response = await createOrder({
+				items: inventory.map((item, idx) => ({
+					id: item.id,
+					quantity: order.buyQuantity[idx],
+				})),
+			});
+			alert(`Order placed! Confirmation: ${response.confirmationNumber}`);
+		} catch (error) {
+			if (error.response && error.response.status === 409) {
+				const { itemId, requested, available } = error.response.data;
+				alert(`Conflict: Item ${itemId} requested ${requested}, but only ${available} available.`);
+			} else {
+				alert('An error occurred while placing the order.');
+			}
+		}
 	};
-
-	const handleQuantityChange = (index, value) => {
-		setOrder((prev) => {
-			const q = [...prev.buyQuantity];
-			const num = Number(value) || 0;
-			q[index] = Math.max(0, Math.floor(num));
-			return { ...prev, buyQuantity: q };
-		});
-	};
-
-	const productList = useMemo(() => productlist, []);
-
-	const anySelected = order.buyQuantity.some((q) => q > 0);
-
-	const totalPrice = productList.reduce(
-		(sum, product, idx) => sum + (product.price || 0) * (order.buyQuantity[idx] || 0),
-		0
-	);
 
 	return (
 		<div className="min-h-screen bg-secondary-bg p-6">
@@ -46,16 +45,15 @@ const Purchase = () => {
 				<h1 className="text-2xl text-center font-semibold text-primary-text mb-4">
 					PitStopProvisions Products
 				</h1>
-
 				<form onSubmit={handleSubmit} className="grid gap-6">
 					<div className="grid grid-cols-1 gap-4">
-						{productList.map((product, idx) => (
+						{inventory.map((product, idx) => (
 							<div
-								key={product.id || product.name}
+								key={product.id}
 								className="bg-primary-bg rounded-lg shadow p-4 flex items-center justify-between gap-x-4"
 							>
 								<img
-									src={productImages.get(product.id)}
+									src={product.image}
 									alt={product.name}
 									className="w-20 h-20 object-cover rounded-md mr-6"
 								/>
@@ -67,25 +65,41 @@ const Purchase = () => {
 									<button
 										type="button"
 										aria-label={`remove one ${product.name}`}
-										className="h-12 w-12 flex items-center justify-center rounded-full bg-secondary-bg hover:bg-primary-bg-hover text-primary-text shadow"
-										onClick={() => handleQuantityChange(idx, (order.buyQuantity[idx] || 0) - 1)}
+										className="h-12 w-12 flex items-center justify-center rounded-full bg-secondary-bg hover:bg-secondary-text text-primary-text shadow"
+										onClick={() =>
+											setOrder((prevOrder) => {
+												const newQuantity = [...prevOrder.buyQuantity];
+												newQuantity[idx] = Math.max(0, newQuantity[idx] - 1);
+												return { ...prevOrder, buyQuantity: newQuantity };
+											})
+										}
 									>
 										-
 									</button>
-
 									<input
 										type="number"
 										min="0"
 										className="w-20 text-center rounded border-secondary-text shadow-sm no-spinner"
 										value={order.buyQuantity[idx] ?? 0}
-										onChange={(e) => handleQuantityChange(idx, e.target.value)}
+										onChange={(e) =>
+											setOrder((prevOrder) => {
+												const newQuantity = [...prevOrder.buyQuantity];
+												newQuantity[idx] = parseInt(e.target.value, 10) || 0;
+												return { ...prevOrder, buyQuantity: newQuantity };
+											})
+										}
 									/>
-
 									<button
 										type="button"
 										aria-label={`add one ${product.name}`}
-										className="h-12 w-12 flex items-center justify-center rounded-full bg-secondary-bg hover:bg-primary-bg-hover text-primary-text shadow"
-										onClick={() => handleQuantityChange(idx, (order.buyQuantity[idx] || 0) + 1)}
+										className="h-12 w-12 flex items-center justify-center rounded-full bg-primary-bg hover:bg-primary-bg-hover text-primary-text shadow"
+										onClick={() =>
+											setOrder((prevOrder) => {
+												const newQuantity = [...prevOrder.buyQuantity];
+												newQuantity[idx] = newQuantity[idx] + 1;
+												return { ...prevOrder, buyQuantity: newQuantity };
+											})
+										}
 									>
 										+
 									</button>
@@ -93,19 +107,22 @@ const Purchase = () => {
 							</div>
 						))}
 					</div>
-
-					{/* Total Price Section */}
 					<div className="flex justify-end mt-4">
 						<div className="text-lg font-bold text-primary-text">
-							Total Price: ${totalPrice.toFixed(2)}
+							Total Price: $
+							{inventory
+								.reduce(
+									(total, product, idx) => total + product.price * (order.buyQuantity[idx] || 0),
+									0
+								)
+								.toFixed(2)}
 						</div>
 					</div>
-
 					<div className="flex justify-end">
 						<button
 							type="submit"
-							className="btn-primary disabled:opacity-50 hover:bg-primary-bg-hover"
-							disabled={!anySelected}
+							className="btn-primary disabled:opacity-50"
+							disabled={!order.buyQuantity.some((qty) => qty > 0)}
 						>
 							Continue to Payment
 						</button>

@@ -1,0 +1,18 @@
+{
+	"name": "pitstop-serverless",
+	"version": "1.0.0",
+	"main": "handler-inventory.js",
+	"scripts": {
+		"deploy": "serverless deploy",
+		"deploy:dev": "serverless deploy --stage dev",
+		"remove": "serverless remove",
+		"offline": "serverless offline"
+	},
+	"dependencies": {
+		"node-fetch": "^2.6.7"
+	},
+	"devDependencies": {
+		"serverless": "^3.40.0",
+		"serverless-offline": "^14.4.0"
+	}
+}
