@@ -1,2 +1,3 @@
-- figure out all environment variables
-- 
+- figure out all environment variables, paths for order lambda
+- figure out serverless deploy
+- images on items
