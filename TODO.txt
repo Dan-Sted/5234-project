@@ -11,3 +11,4 @@ TODO:
 - load time for product / purchase?
 - get actual confirmation number set up?
 - maybe keep track of cart throughout different pages?
+- create docs page?
