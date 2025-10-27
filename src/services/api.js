@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_INVENTORY_API;
+const API_BASE_URL = 'https://po0pow4923.execute-api.us-east-2.amazonaws.com/dev';
 
 export const getInventory = async () => {
 	console.log('getInventory called');
