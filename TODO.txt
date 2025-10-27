@@ -1,0 +1,2 @@
+- figure out all environment variables
+- 

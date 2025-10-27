@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { getInventory, createOrder } from '../../../services/api';
+import { getInventory } from '../../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const Purchase = () => {
 	const [inventory, setInventory] = useState([]);
 	const [order, setOrder] = useState({
 		buyQuantity: [],
 	});
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchInventory = async () => {
@@ -25,24 +27,11 @@ const Purchase = () => {
 		fetchInventory();
 	}, []);
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
-		try {
-			const response = await createOrder({
-				items: inventory.map((item, idx) => ({
-					id: item.id,
-					quantity: order.buyQuantity[idx],
-				})),
-			});
-			alert(`Order placed! Confirmation: ${response.confirmationNumber}`);
-		} catch (error) {
-			if (error.response && error.response.status === 409) {
-				const { itemId, requested, available } = error.response.data;
-				alert(`Conflict: Item ${itemId} requested ${requested}, but only ${available} available.`);
-			} else {
-				alert('An error occurred while placing the order.');
-			}
-		}
+		navigate('/purchase/paymentEntry', {
+			state: { order },
+		});
 	};
 
 	return (

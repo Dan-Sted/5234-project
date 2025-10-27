@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import productlist from '../../common/productlist';
+import { createOrder } from '../../../services/api';
 
 const cardStyle = {
 	margin: '0 auto',
@@ -44,22 +45,29 @@ const ViewOrder = () => {
 	const shipState = shipping.state;
 	const shipZip = shipping.zip;
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		navigate('/purchase/confirmation', {
-			state: {
-				order: {
-					...location.state.order,
-					items: purchased.map((item) => ({
-						name: item.name,
-						quantity: item.qty,
-						price: item.price,
-					})),
+		try {
+			const orderResponse = await createOrder({
+				items: purchased.map((item) => ({
+					id: item.id,
+					quantity: item.qty,
+				})),
+				payment,
+				shipping,
+			});
+			console.log('Order created successfully:', orderResponse);
+			navigate('/purchase/confirmation', {
+				state: {
+					order: orderResponse,
+					payment,
+					shipping,
 				},
-				payment: location.state.payment,
-				shipping: location.state.shipping,
-			},
-		});
+			});
+		} catch (error) {
+			console.error('Error creating order:', error);
+			alert('An error occurred while creating the order. Please try again.');
+		}
 	};
 
 	if (!shipping) {
