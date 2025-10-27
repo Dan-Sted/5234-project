@@ -5,10 +5,10 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1
+  region: us-east-2
   stage: dev
   environment:
-    INVENTORY_API: ${ 'https://example.com'}
+    INVENTORY_API: ${'https://po0pow4923.execute-api.us-east-2.amazonaws.com/dev/inventory'}
 functions:
   inventoryList:
     handler: handler-inventory.list
@@ -29,7 +29,7 @@ functions:
   orderCreate:
     handler: handler-order.create
     environment:
-      INVENTORY_API: ${ssm:/pitstop/inventory-api} # Use AWS Systems Manager Parameter Store
+      INVENTORY_API: ${'https://po0pow4923.execute-api.us-east-2.amazonaws.com/dev/inventory'}
     events:
       - http:
           path: order
