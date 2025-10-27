@@ -1,6 +1,6 @@
 service: pitstop-provisions-api
 
-frameworkVersion: "3"
+frameworkVersion: "4.22.0"
 
 provider:
   name: aws
