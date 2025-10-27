@@ -5,3 +5,9 @@ TODO:
 - images on items, where do they go
 - fix lambda handler names and matching on aws
 - clean up front end code?
+- more content for home page
+- about us layout tweaks?
+- better ui for contact us
+- load time for product / purchase?
+- get actual confirmation number set up?
+- maybe keep track of cart throughout different pages?

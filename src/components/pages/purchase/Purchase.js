@@ -87,7 +87,7 @@ const Purchase = () => {
 									<button
 										type="button"
 										aria-label={`add one ${product.name}`}
-										className="h-12 w-12 flex items-center justify-center rounded-full bg-primary-bg hover:bg-primary-bg-hover text-primary-text shadow"
+										className="h-12 w-12 flex items-center justify-center rounded-full bg-secondary-bg hover:bg-primary-bg-hover text-primary-text shadow"
 										onClick={() =>
 											setOrder((prevOrder) => {
 												const newQuantity = [...prevOrder.buyQuantity];
@@ -116,7 +116,7 @@ const Purchase = () => {
 					<div className="flex justify-end">
 						<button
 							type="submit"
-							className="btn-primary disabled:opacity-50"
+							className="btn-primary hover:bg-primary-bg-hover disabled:opacity-50"
 							disabled={!order.buyQuantity.some((qty) => qty > 0)}
 						>
 							Continue to Payment
