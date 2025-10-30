@@ -11,7 +11,7 @@ provider:
     INVENTORY_API: ${'https://po0pow4923.execute-api.us-east-2.amazonaws.com/dev/inventory'}
 functions:
   inventoryList:
-    handler: handler-inventory.list
+    handler: inventory-list.listItems
     events:
       - http:
           path: inventory
@@ -19,7 +19,7 @@ functions:
           cors: true
 
   inventoryGet:
-    handler: handler-inventory-getById.getById
+    handler: inventory-get-item.getItem
     events:
       - http:
           path: inventory/items/{id}
@@ -27,7 +27,7 @@ functions:
           cors: true
 
   orderCreate:
-    handler: handler-order.create
+    handler: order-reserve.createOrder
     environment:
       INVENTORY_API: ${'https://po0pow4923.execute-api.us-east-2.amazonaws.com/dev/inventory'}
     events:

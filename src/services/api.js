@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://po0pow4923.execute-api.us-east-2.amazonaws.com/dev';
+const API_BASE_URL = 'https://n1u3hvxmqf.execute-api.us-east-2.amazonaws.com/prod';
 
 export const getInventory = async () => {
 	console.log('getInventory called');

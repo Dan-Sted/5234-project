@@ -6,7 +6,7 @@ const items = [
 	{ id: 'telemetry', name: 'Telemetry Data Logger', price: 1499.99, quantity: 4 },
 ];
 
-module.exports.getById = async (event) => {
+module.exports.getItem = async (event) => {
 	try {
 		const id =
 			(event.pathParameters && event.pathParameters.id) ||

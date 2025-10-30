@@ -7,8 +7,8 @@ const items = [
 	{ id: 'telemetry', name: 'Telemetry Data Logger', price: 1499.99, quantity: 4 },
 ];
 
-// GET /inventory and GET /inventory/items?name=
-module.exports.list = async (event) => {
+// GET /inventory
+module.exports.listItems = async (event) => {
 	try {
 		const query = event.queryStringParameters || {};
 		const nameFilter = query.name ? String(query.name).toLowerCase() : null;
