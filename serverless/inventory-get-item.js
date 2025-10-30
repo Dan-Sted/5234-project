@@ -13,8 +13,6 @@ module.exports.getItem = async (event) => {
 			(event.path && event.path.split('/').pop()) ||
 			(event.queryStringParameters && event.queryStringParameters.id);
 
-		console.log('getById (separate lambda) called for id:', id);
-
 		if (!id) {
 			return {
 				statusCode: 400,

@@ -45,7 +45,6 @@ const ViewOrder = () => {
 				payment,
 				shipping,
 			});
-			console.log('Order created successfully:', orderResponse);
 			navigate('/purchase/confirmation', {
 				state: {
 					order: orderResponse,

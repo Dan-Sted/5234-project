@@ -1,9 +1,6 @@
 TODO:
 - figure out all environment variables, where they should go, paths for order lambda
-- set up aws cdk
-- connect and figure out cdk deploy
 - images on items, where do they go
-- fix lambda handler names and matching on aws
 - more content for home page
 - about us layout tweaks?
 - better ui for contact us
