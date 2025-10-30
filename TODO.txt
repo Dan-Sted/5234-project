@@ -1,9 +1,5 @@
 TODO:
-- figure out all environment variables, where they should go, paths for order lambda
 - images on items, where do they go
-- more content for home page
-- about us layout tweaks?
-- better ui for contact us
 - load time for product / purchase?
 - get actual confirmation number set up?
 - maybe keep track of cart throughout different pages?
