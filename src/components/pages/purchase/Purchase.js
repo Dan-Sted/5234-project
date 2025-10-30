@@ -11,10 +11,8 @@ const Purchase = () => {
 
 	useEffect(() => {
 		const fetchInventory = async () => {
-			console.log('fetchInventory called');
 			try {
 				const data = await getInventory();
-				console.log('Fetched Inventory:', data);
 				setInventory(data);
 				setOrder((prevOrder) => ({
 					...prevOrder,
