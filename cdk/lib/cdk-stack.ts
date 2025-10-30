@@ -45,6 +45,28 @@ export class InventoryStack extends cdk.Stack {
 				],
 			},
 		});
+
+		// Ensure API Gateway returns CORS headers on gateway-generated 4XX/5XX responses
+		// (API Gateway does not automatically add CORS headers to integration errors).
+		api.addGatewayResponse('Default4xxCors', {
+			type: apigw.ResponseType.DEFAULT_4XX,
+			responseHeaders: {
+				'Access-Control-Allow-Origin': "'*'",
+				'Access-Control-Allow-Headers':
+					"'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+				'Access-Control-Allow-Methods': "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+			},
+		});
+
+		api.addGatewayResponse('Default5xxCors', {
+			type: apigw.ResponseType.DEFAULT_5XX,
+			responseHeaders: {
+				'Access-Control-Allow-Origin': "'*'",
+				'Access-Control-Allow-Headers':
+					"'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'",
+				'Access-Control-Allow-Methods': "'OPTIONS,GET,PUT,POST,DELETE,PATCH,HEAD'",
+			},
+		});
 		const inv = api.root.addResource('inventory');
 		inv.addMethod('GET', new apigw.LambdaIntegration(inventoryList));
 		const items = inv.addResource('items');

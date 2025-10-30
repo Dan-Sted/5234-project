@@ -9,6 +9,7 @@
 		"offline": "serverless offline"
 	},
 	"dependencies": {
+		"aws-sdk": "^2.1692.0",
 		"node-fetch": "^2.6.7"
 	}
 }
