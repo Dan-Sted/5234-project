@@ -3,17 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import productlist from '../../common/productlist';
 import { createOrder } from '../../../services/api';
 
-const cardStyle = {
-	margin: '0 auto',
-	maxWidth: 500,
-	minWidth: 300,
-	width: '100%',
-	padding: '2rem',
-	boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-	borderRadius: '8px',
-	background: 'var(--primary-bg)', // Changed to primary background
-};
-
 const ViewOrder = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
@@ -76,17 +65,9 @@ const ViewOrder = () => {
 
 	return (
 		<div className="min-h-screen bg-secondary-bg p-6">
-			<div
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					gap: '2rem',
-					marginTop: '2rem',
-				}}
-			>
+			<div className="flex flex-col items-center gap-8 mt-8">
 				{/* Order Summary */}
-				<div className="card" style={cardStyle}>
+				<div className="card card-centered">
 					<h1 className="text-2xl font-semibold text-primary-text mb-4">Order Summary</h1>
 					<div className="card">
 						{purchased.length === 0 ? (
@@ -130,7 +111,7 @@ const ViewOrder = () => {
 				</div>
 
 				{/* Payment Information List */}
-				<div className="card" style={cardStyle}>
+				<div className="card card-centered">
 					<h2 className="text-xl font-semibold text-primary-text mb-4">Payment Information</h2>
 					<ul className="space-y-3">
 						<li className="flex items-center">
@@ -153,7 +134,7 @@ const ViewOrder = () => {
 				</div>
 
 				{/* Shipping Information List */}
-				<div className="card" style={cardStyle}>
+				<div className="card card-centered">
 					<h2 className="text-xl font-semibold text-primary-text mb-4">Shipping Information</h2>
 					<ul className="space-y-3">
 						<li className="flex items-center">
@@ -178,7 +159,7 @@ const ViewOrder = () => {
 						</li>
 					</ul>
 				</div>
-				<form onSubmit={handleSubmit} className="card" style={cardStyle}>
+				<form onSubmit={handleSubmit} className="card card-centered">
 					<div className="flex justify-center">
 						<button type="submit" className="btn-secondary hover:bg-primary-bg-hover">
 							Continue to confirmation

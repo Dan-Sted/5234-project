@@ -1,16 +1,5 @@
 import { useLocation } from 'react-router-dom';
 
-const cardStyle = {
-	margin: '2rem auto',
-	maxWidth: 500,
-	minWidth: 300,
-	width: '100%',
-	padding: '2rem',
-	boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-	borderRadius: '8px',
-	background: 'var(--primary-bg)',
-};
-
 const Confirmation = () => {
 	const location = useLocation();
 
@@ -29,7 +18,7 @@ const Confirmation = () => {
 	return (
 		<div className="min-h-screen bg-secondary-bg p-6">
 			{/* confirmation*/}
-			<div className="card" style={cardStyle}>
+			<div className="card card-centered">
 				<h2 className="text-xl font-semibold text-primary-text mb-4">Order Confirmation</h2>
 				<div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
 					<div className="font-medium text-secondary-text" style={{ fontSize: '1.1rem' }}>
