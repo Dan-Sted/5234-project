@@ -32,16 +32,17 @@ const Products = () => {
 							</div>
 						))}
 					</div>
+					<div className="mt-6 flex justify-end">
+						<button
+							className="bg-primary-bg text-primary-text py-2 px-4 rounded hover:bg-primary-bg-hover shadow-lg"
+							onClick={() => navigate('/purchase')}
+							aria-label="Buy now"
+						>
+							Buy Now!
+						</button>
+					</div>
 				</div>
 			</main>
-			<div className="fixed bottom-16 right-4">
-				<button
-					className="bg-primary-bg text-primary-text py-2 px-4 rounded hover:bg-primary-bg-hover shadow-lg"
-					onClick={() => navigate('/purchase')}
-				>
-					Buy Now!
-				</button>
-			</div>
 		</div>
 	);
 };
